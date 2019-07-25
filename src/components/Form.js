@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { team } from "./Data"; 
+import DisplayTeam from "./DisplayTeam";  
 
 const Form = () => {
 
     const [member, setMember] = useState({ name: "", email: "", role: "" });
+    const [newTeam, setTeam] = useState(team); 
     
     function handleChange(event) {
         const updatedMember = { ...member, [event.target.name]: event.target.value};
@@ -17,7 +20,8 @@ const Form = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log("member:", member);
+        setTeam([...team, member]); 
+        console.log("member:", member, "team:", team);
     }
 
 
@@ -59,9 +63,7 @@ const Form = () => {
                 value={member.role}
               />
             </div>
-            <button type="submit" onClick={() => console.log(member)}>
-              Submit
-            </button>
+            <button type="submit">Submit</button>
           </fieldset>
         </form>
     ); 

@@ -7,6 +7,7 @@ const DisplayTeam = (props) => {
             <h2>{props.props.name}</h2>
             <p>{props.props.email}</p>
             <p>{props.props.role}</p>
+            <button>Edit</button>
         </div>
     ); 
 

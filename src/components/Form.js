@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
-import { team } from "./Data"; 
-import DisplayTeam from "./DisplayTeam";  
+import DisplayTeam from "./DisplayTeam"; 
+ 
 
-const Form = () => {
+const Form = ({team}) => {
 
+    // 
     const [member, setMember] = useState({ name: "", email: "", role: "" });
     const [newTeam, setTeam] = useState(team); 
     
     function handleChange(event) {
-        const updatedMember = { ...member, [event.target.name]: event.target.value};
+        const updatedMember = {...member, [event.target.name]: event.target.value};
         console.log(
         "handleChange function:",
         event.target.name,
         event.target.value,
-        updatedMember
         );
         setMember(updatedMember);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        setTeam([...team, member]); 
-        console.log("member:", member, "team:", team);
+        setTeam([...newTeam, member]);
     }
 
-
     return (
+      <div>
+
         <form onSubmit={handleSubmit}>
           <fieldset>
             <legend>Signup</legend>
@@ -44,28 +44,38 @@ const Form = () => {
               </label>
             </div>
             <div>
-              <label for="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                value={member.email}
-                onChange={handleChange}
-              />
+              <label for="email">Email
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value={member.email}
+                    onChange={handleChange}
+                  />
+                </div>
+              </label>
             </div>
             <div>
-              <label for="role">Role</label>
-              <input
-                type="text"
-                name="role"
-                placeholder="Enter your role"
-                onChange={handleChange}
-                value={member.role}
-              />
+              <label for="role">Role
+                <div>
+                  <input
+                    type="text"
+                    name="role"
+                    placeholder="Enter your role"
+                    onChange={handleChange}
+                    value={member.role}
+                  />
+                </div>
+              </label>
             </div>
             <button type="submit">Submit</button>
           </fieldset>
         </form>
+
+        {newTeam.map((member) => {console.log(member); return <DisplayTeam props ={member}/>})}
+
+       </div> 
     ); 
 }
 
